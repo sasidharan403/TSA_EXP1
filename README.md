@@ -5,7 +5,7 @@
 ## Date :
 
 # AIM:
-To Develop a python program to Plot a time series data temperature.
+To Develop a python program to Plot a time series data on Global temperature
 # ALGORITHM:
 1. Import the required packages like pandas and matplot
 2. Read the dataset using the pandas
@@ -14,22 +14,25 @@ To Develop a python program to Plot a time series data temperature.
 5. Display the graph.
 # PROGRAM:
 ~~~
-import matplotlib.pyplot as plt
 import pandas as pd
-df=pd.read_csv("DailyDelhiClimateTrain.csv",parse_dates=["date"],index_col="date")
-df.head()
-mean=df["meantemp"].resample('M').mean().plot(kind='line')
-plt.xlabel("Month")
-plt.ylabel("Temperature")
+import matplotlib.pyplot as plt
+df = pd.read_csv('climate_data.csv')
+df['dt'] = pd.to_datetime(df['dt'])
+df.set_index('dt', inplace=True)
+plt.figure(figsize=(12, 6))
+plt.plot(df.index, df['AverageTemperature'], color='red', marker='o', linestyle='-') # Changed 'Temperature_Anomaly' to 'AverageTemperature'
+plt.title('Global Temperature Anomalies Over Time')
+plt.xlabel('Year')
+plt.ylabel('Temperature Anomaly (°C)')
+plt.grid(True)
 plt.show()
 ~~~
 # OUTPUT:
 
+![image](https://github.com/user-attachments/assets/cec98d5d-8fe4-49ac-969d-aef94bcee11c)
 
-
-![image](https://github.com/user-attachments/assets/961c4665-76ab-4ba7-8c54-80e102f24a8f)
 
 
 
 # RESULT:
-Thus we have created the python code for plotting the time series of given data.
+we have created the python code for plotting the time series of given data.
